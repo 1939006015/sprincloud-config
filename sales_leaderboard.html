@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>销售排行榜</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 时间周期切换 -->
+        <div class="period-switch">
+            <button class="period-btn active" data-period="daily">日榜</button>
+            <button class="period-btn" data-period="monthly">月榜</button>
+        </div>
+
+        <!-- 前三名立体式卡片 -->
+        <div class="top-three">
+            <!-- 第二名 -->
+            <div class="rank-card rank-2">
+                <div class="card-inner">
+                    <div class="rank-badge">
+                        <i class="fas fa-medal"></i>
+                        <span>2</span>
+                    </div>
+                    <div class="avatar">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23666'/%3E%3Ccircle cx='50' cy='40' r='15' fill='%23999'/%3E%3Cellipse cx='50' cy='75' rx='20' ry='15' fill='%23999'/%3E%3C/svg%3E" alt="Brian Ngo">
+                    </div>
+                    <h3>Brian Ngo</h3>
+                    <div class="achievement">达成2,000点目标</div>
+                    <div class="prize">
+                        <i class="fas fa-gem"></i>
+                        <span>50,000</span>
+                        <small>奖金</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第一名 -->
+            <div class="rank-card rank-1">
+                <div class="crown">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="card-inner">
+                    <div class="rank-badge">
+                        <i class="fas fa-trophy"></i>
+                        <span>1</span>
+                    </div>
+                    <div class="avatar">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23FFD700'/%3E%3Ccircle cx='50' cy='40' r='15' fill='%23FFF'/%3E%3Cellipse cx='50' cy='75' rx='20' ry='15' fill='%23FFF'/%3E%3C/svg%3E" alt="Jolie Joie">
+                    </div>
+                    <h3>Jolie Joie</h3>
+                    <div class="achievement">达成2,000点目标</div>
+                    <div class="prize">
+                        <i class="fas fa-gem"></i>
+                        <span>100,000</span>
+                        <small>奖金</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第三名 -->
+            <div class="rank-card rank-3">
+                <div class="card-inner">
+                    <div class="rank-badge">
+                        <i class="fas fa-medal"></i>
+                        <span>3</span>
+                    </div>
+                    <div class="avatar">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23CD7F32'/%3E%3Ccircle cx='50' cy='40' r='15' fill='%23FFF'/%3E%3Cellipse cx='50' cy='75' rx='20' ry='15' fill='%23FFF'/%3E%3C/svg%3E" alt="David Do">
+                    </div>
+                    <h3>David Do</h3>
+                    <div class="achievement">达成2,000点目标</div>
+                    <div class="prize">
+                        <i class="fas fa-gem"></i>
+                        <span>20,000</span>
+                        <small>奖金</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 倒计时和激励信息 -->
+        <div class="motivation-section">
+            <div class="countdown">
+                <i class="fas fa-clock"></i>
+                <span>截止时间</span>
+                <div class="time-display">10天 23小时 59分 29秒</div>
+            </div>
+            <div class="stats">
+                <span>今日你获得了 <i class="fas fa-gem"></i> 5 点，在 23,141 名用户中排名领先</span>
+            </div>
+        </div>
+
+        <!-- 排行榜表格 -->
+        <div class="leaderboard-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>用户名</th>
+                        <th>粉丝数</th>
+                        <th>积分</th>
+                        <th>奖励</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="rank">4</td>
+                        <td class="user">
+                            <div class="user-info">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23FF6B6B'/%3E%3Ccircle cx='50' cy='40' r='15' fill='%23FFF'/%3E%3Cellipse cx='50' cy='75' rx='20' ry='15' fill='%23FFF'/%3E%3C/svg%3E" alt="Henrietta O'Connell">
+                                <div>
+                                    <div class="name">Henrietta O'Connell</div>
+                                    <div class="username">@henrietta</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>12,241</td>
+                        <td>2,114,424</td>
+                        <td class="reward"><i class="fas fa-gem"></i> 1000</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">5</td>
+                        <td class="user">
+                            <div class="user-info">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%234ECDC4'/%3E%3Ccircle cx='50' cy='40' r='15' fill='%23FFF'/%3E%3Cellipse cx='50' cy='75' rx='20' ry='15' fill='%23FFF'/%3E%3C/svg%3E" alt="Darrel Bins">
+                                <div>
+                                    <div class="name">Darrel Bins</div>
+                                    <div class="username">@darrel</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>12,241</td>
+                        <td>2,114,424</td>
+                        <td class="reward"><i class="fas fa-gem"></i> 1000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 激励标语 -->
+        <div class="motivation-banner">
+            <div class="motivation-text">
+                <h2><i class="fas fa-fire"></i> 冲刺榜首，赢取大奖！</h2>
+                <p>每一次成单都是向成功迈进的一步，坚持就是胜利！</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 时间周期切换功能
+        document.querySelectorAll('.period-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // 倒计时功能
+        function updateCountdown() {
+            const endTime = new Date().getTime() + (10 * 24 * 60 * 60 * 1000) + (23 * 60 * 60 * 1000) + (59 * 60 * 1000) + (29 * 1000);
+            
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = endTime - now;
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.querySelector('.time-display').innerHTML = `${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+            }, 1000);
+        }
+        
+        updateCountdown();
+    </script>
+</body>
+</html>
