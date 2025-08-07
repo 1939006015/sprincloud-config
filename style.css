@@ -1,0 +1,727 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f1419 0%, #1a2332 25%, #2d3748 50%, #1a2332 75%, #0f1419 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(147, 51, 234, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header Section */
+.header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.toggle-buttons {
+    display: flex;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 4px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toggle-btn {
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    color: #a0aec0;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+    background: rgba(59, 130, 246, 0.2);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.toggle-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+/* Podium Section */
+.podium-section {
+    margin-bottom: 3rem;
+}
+
+.podium {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    perspective: 1000px;
+}
+
+.podium-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.podium-item:hover {
+    transform: translateY(-10px) scale(1.05);
+}
+
+/* Podium Heights */
+.first-place {
+    order: 2;
+}
+
+.second-place {
+    order: 1;
+    margin-top: 40px;
+}
+
+.third-place {
+    order: 3;
+    margin-top: 80px;
+}
+
+/* Avatar Styling */
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    position: relative;
+    border: 4px solid transparent;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #10b981);
+    background-clip: padding-box;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.first-place .avatar {
+    width: 100px;
+    height: 100px;
+    border-width: 5px;
+    background: linear-gradient(45deg, #ffd700, #ffed4e, #ffc107);
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Player Names */
+.player-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.first-place .player-name {
+    font-size: 1.4rem;
+    color: #ffd700;
+}
+
+/* Achievement Section */
+.achievement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.medal {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.points-label {
+    font-size: 0.8rem;
+    color: #a0aec0;
+    text-align: center;
+}
+
+/* Prize Section */
+.prize {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(59, 130, 246, 0.1);
+    padding: 16px 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    margin-bottom: 2rem;
+    min-width: 120px;
+}
+
+.first-place .prize {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.diamond {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #3b82f6;
+}
+
+.first-place .amount {
+    color: #ffd700;
+    font-size: 1.8rem;
+}
+
+.prize-label {
+    font-size: 0.8rem;
+    color: #a0aec0;
+    margin-top: 0.25rem;
+}
+
+/* Podium Bases */
+.podium-base {
+    width: 150px;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
+}
+
+.podium-base.first {
+    height: 120px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.podium-base.second {
+    height: 80px;
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.2), rgba(192, 192, 192, 0.1));
+    border-color: rgba(192, 192, 192, 0.3);
+}
+
+.podium-base.third {
+    height: 40px;
+    background: linear-gradient(135deg, rgba(205, 127, 50, 0.2), rgba(205, 127, 50, 0.1));
+    border-color: rgba(205, 127, 50, 0.3);
+}
+
+/* Timer Section */
+.timer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.timer-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.timer-text {
+    color: #a0aec0;
+    margin-bottom: 0.5rem;
+}
+
+.timer-countdown {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #3b82f6;
+}
+
+/* Achievement Banner */
+.achievement-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 16px 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.earned-points {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.total-users {
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+/* Leaderboard Table */
+.leaderboard-table {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 80px 1fr 120px 120px 120px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+    color: #a0aec0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 120px 120px 120px;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background-color 0.3s ease;
+    align-items: center;
+}
+
+.table-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.table-row:last-child {
+    border-bottom: none;
+}
+
+.rank {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.handle {
+    color: #a0aec0;
+    font-size: 0.85rem;
+}
+
+.followers, .points {
+    font-weight: 500;
+}
+
+.reward {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .podium {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .podium-item {
+        order: unset !important;
+        margin-top: 0 !important;
+    }
+    
+    .podium-base {
+        display: none;
+    }
+    
+    .table-header, .table-row {
+        grid-template-columns: 60px 1fr 80px 80px 80px;
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .achievement-banner {
+        font-size: 0.9rem;
+        padding: 12px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .table-header, .table-row {
+        grid-template-columns: 50px 1fr 70px;
+        gap: 10px;
+    }
+    
+    .followers-col, .point-col {
+        display: none;
+    }
+    
+    .followers, .points {
+        display: none;
+    }
+    
+    .toggle-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+    }
+}
+
+@keyframes goldGlow {
+    0%, 100% {
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.7);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.podium-item {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.first-place {
+    animation-delay: 0.2s;
+}
+
+.first-place .avatar {
+    animation: goldGlow 3s ease-in-out infinite;
+}
+
+.first-place .prize {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.second-place {
+    animation-delay: 0s;
+}
+
+.third-place {
+    animation-delay: 0.4s;
+}
+
+.table-row {
+    animation: fadeInUp 0.4s ease forwards;
+}
+
+.table-row:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.table-row:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+/* Enhanced hover effects */
+.medal:hover {
+    transform: rotate(10deg) scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.diamond:hover {
+    animation: pulse 0.5s ease;
+}
+
+/* Improved mobile experience */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .podium {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .podium-item {
+        order: unset !important;
+        margin-top: 0 !important;
+        max-width: 280px;
+        width: 100%;
+    }
+    
+    .podium-base {
+        display: none;
+    }
+    
+    .first-place .avatar {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .avatar {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .table-header, .table-row {
+        grid-template-columns: 60px 1fr 80px 80px 80px;
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .achievement-banner {
+        font-size: 0.9rem;
+        padding: 12px 16px;
+    }
+    
+    .timer-section {
+        padding: 15px;
+        max-width: 250px;
+    }
+    
+    .timer-countdown {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .toggle-buttons {
+        padding: 3px;
+    }
+    
+    .toggle-btn {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .podium-item {
+        max-width: 240px;
+    }
+    
+    .player-name {
+        font-size: 1rem;
+    }
+    
+    .first-place .player-name {
+        font-size: 1.2rem;
+    }
+    
+    .amount {
+        font-size: 1.2rem;
+    }
+    
+    .first-place .amount {
+        font-size: 1.4rem;
+    }
+    
+    .table-header, .table-row {
+        grid-template-columns: 40px 1fr 60px;
+        gap: 8px;
+        padding: 12px;
+        font-size: 0.8rem;
+    }
+    
+    .followers-col, .point-col {
+        display: none;
+    }
+    
+    .followers, .points {
+        display: none;
+    }
+    
+    .achievement-banner {
+        font-size: 0.8rem;
+        padding: 10px 12px;
+        gap: 0.3rem;
+    }
+    
+    .timer-section {
+        padding: 12px;
+        max-width: 200px;
+    }
+    
+    .timer-icon {
+        font-size: 1.5rem;
+    }
+    
+    .timer-countdown {
+        font-size: 1rem;
+    }
+}
+
+/* Ultra-small screens */
+@media (max-width: 320px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .podium-item {
+        max-width: 200px;
+    }
+    
+    .avatar {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .first-place .avatar {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .achievement {
+        padding: 8px 12px;
+    }
+    
+    .prize {
+        padding: 12px 16px;
+        min-width: 100px;
+    }
+}
+
+/* Loading states and micro-interactions */
+.toggle-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.toggle-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.toggle-btn:hover::before {
+    left: 100%;
+}
+
+/* Scroll animations for table rows */
+.table-row {
+    opacity: 0;
+    animation: fadeInUp 0.4s ease forwards;
+}
+
+/* Enhanced focus states for accessibility */
+.toggle-btn:focus,
+.table-row:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .podium-base {
+        display: none;
+    }
+    
+    .achievement-banner,
+    .timer-section {
+        border: 1px solid #ccc;
+        background: #f9f9f9;
+    }
+}
