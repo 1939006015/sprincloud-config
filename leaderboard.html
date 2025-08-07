@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>销售排行榜 - Sales Leaderboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">Leaderboard</h1>
+            <div class="motivation-text">
+                <p>🔥 超越自我，成就非凡！每一单都是向成功迈进的一步！</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Podium Section -->
+            <div class="podium-section">
+                <div class="podium-container">
+                    <!-- 2nd Place -->
+                    <div class="podium-place second-place">
+                        <div class="avatar-container">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Abram Mango" class="avatar">
+                            <div class="crown crown-silver">👑</div>
+                        </div>
+                        <h3 class="name">Abram Mango</h3>
+                        <div class="earnings">$ 415</div>
+                        <div class="podium-base second">
+                            <span class="rank-number">2</span>
+                        </div>
+                    </div>
+
+                    <!-- 1st Place -->
+                    <div class="podium-place first-place">
+                        <div class="avatar-container">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face" alt="Kianna Torff" class="avatar">
+                            <div class="crown crown-gold">👑</div>
+                        </div>
+                        <h3 class="name">Kianna Torff</h3>
+                        <div class="earnings">$ 420</div>
+                        <div class="podium-base first">
+                            <span class="rank-number">1</span>
+                        </div>
+                    </div>
+
+                    <!-- 3rd Place -->
+                    <div class="podium-place third-place">
+                        <div class="avatar-container">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Alfonso Lubin" class="avatar">
+                            <div class="crown crown-bronze">👑</div>
+                        </div>
+                        <h3 class="name">Alfonso Lubin</h3>
+                        <div class="earnings">$ 390</div>
+                        <div class="podium-base third">
+                            <span class="rank-number">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Monthly Leaderboard -->
+                <div class="leaderboard-card">
+                    <div class="card-header">
+                        <h2>📊 Monthly Leaderboard</h2>
+                        <div class="toggle-buttons">
+                            <button class="toggle-btn active">Monthly</button>
+                            <button class="toggle-btn">All Time</button>
+                        </div>
+                    </div>
+                    
+                    <div class="leaderboard-list">
+                        <div class="leaderboard-item">
+                            <span class="rank">1</span>
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face" alt="Kianna Torff" class="small-avatar">
+                            <div class="player-info">
+                                <div class="player-name">Kianna Torff</div>
+                                <div class="battle-stats">🏆 Battles won: ▲ 69 / 88</div>
+                            </div>
+                            <div class="earnings-badge">$ 420</div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <span class="rank">2</span>
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Abram Mango" class="small-avatar">
+                            <div class="player-info">
+                                <div class="player-name">Abram Mango</div>
+                                <div class="battle-stats">💪 Battles won: ▲ 73 / 100</div>
+                            </div>
+                            <div class="earnings-badge">$ 415</div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <span class="rank">3</span>
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face" alt="Alfonso Lubin" class="small-avatar">
+                            <div class="player-info">
+                                <div class="player-name">Alfonso Lubin</div>
+                                <div class="battle-stats">🔥 Battles won: ▲ 63 / 89</div>
+                            </div>
+                            <div class="earnings-badge">$ 390</div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <span class="rank">4</span>
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face" alt="Maren Gouse" class="small-avatar">
+                            <div class="player-info">
+                                <div class="player-name">Maren Gouse</div>
+                                <div class="battle-stats">⚡ Battles won: ▲ 59 / 90</div>
+                            </div>
+                            <div class="earnings-badge">$ 385</div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <span class="rank">5</span>
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=50&h=50&fit=crop&crop=face" alt="Desirae Herwitz" class="small-avatar">
+                            <div class="player-info">
+                                <div class="player-name">Desirae Herwitz</div>
+                                <div class="battle-stats">🚀 Battles won: ▲ 53 / 112</div>
+                            </div>
+                            <div class="earnings-badge">$ 360</div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <span class="rank">6</span>
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face" alt="Kianna Torff" class="small-avatar">
+                            <div class="player-info">
+                                <div class="player-name">Kianna Torff</div>
+                                <div class="battle-stats">💎 Battles won: ▲ 24 / 76</div>
+                            </div>
+                            <div class="earnings-badge">$ 324</div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <span class="rank">7</span>
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Max Cooper" class="small-avatar">
+                            <div class="player-info">
+                                <div class="player-name">Max Cooper</div>
+                                <div class="battle-stats">⭐ Battles won: ▲ 32 / 97</div>
+                            </div>
+                            <div class="earnings-badge">$ 290</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monthly Rewards -->
+                <div class="rewards-card">
+                    <div class="card-header">
+                        <h2>🏆 Monthly Rewards</h2>
+                        <p class="rewards-description">
+                            At the end of each month, the top 10 winners on our leaderboard receive 
+                            <strong>$USDC rewards</strong> based on their ranking.
+                        </p>
+                    </div>
+                    
+                    <div class="rewards-list">
+                        <div class="reward-item featured">
+                            <span class="reward-rank">1st</span>
+                            <span class="reward-label">place</span>
+                            <span class="reward-amount">$ 250</span>
+                        </div>
+                        
+                        <div class="reward-item featured">
+                            <span class="reward-rank">2nd</span>
+                            <span class="reward-label">place</span>
+                            <span class="reward-amount">$ 200</span>
+                        </div>
+                        
+                        <div class="reward-item featured">
+                            <span class="reward-rank">3rd</span>
+                            <span class="reward-label">place</span>
+                            <span class="reward-amount">$ 150</span>
+                        </div>
+                        
+                        <div class="reward-item">
+                            <span class="reward-rank">4th</span>
+                            <span class="reward-label">place</span>
+                            <span class="reward-amount">$ 100</span>
+                        </div>
+                        
+                        <div class="reward-item">
+                            <span class="reward-rank">5th</span>
+                            <span class="reward-label">place</span>
+                            <span class="reward-amount">$ 75</span>
+                        </div>
+                        
+                        <div class="reward-item">
+                            <span class="reward-rank">6th</span>
+                            <span class="reward-label">place</span>
+                            <span class="reward-amount">$ 60</span>
+                        </div>
+                        
+                        <div class="reward-item">
+                            <span class="reward-rank">7th</span>
+                            <span class="reward-label">place</span>
+                            <span class="reward-amount">$ 50</span>
+                        </div>
+                        
+                        <div class="reward-item">
+                            <span class="reward-rank">8th</span>
+                            <span class="reward-label">place</span>
+                            <span class="reward-amount">$ 40</span>
+                        </div>
+                        
+                        <div class="reward-item">
+                            <span class="reward-rank">9th</span>
+                            <span class="reward-label">place</span>
+                            <span class="reward-amount">$ 30</span>
+                        </div>
+                        
+                        <div class="reward-item">
+                            <span class="reward-rank">10th</span>
+                            <span class="reward-label">place</span>
+                            <span class="reward-amount">$ 25</span>
+                        </div>
+                    </div>
+                    
+                    <div class="motivation-footer">
+                        <p>🎯 <strong>每一单都让你更接近奖励！继续加油！</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
