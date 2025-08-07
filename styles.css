@@ -6,14 +6,10 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: 
-        linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.8) 50%, rgba(15, 52, 96, 0.9) 100%),
-        url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxwYXR0ZXJuIGlkPSJzdGFycyIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBhMGEyMyIvPgogICAgICA8Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIxLjUiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuMyIvPgogICAgICA8Y2lyY2xlIGN4PSI4MCIgY3k9IjMwIiByPSIxIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjIiLz4KICAgICAgPGNpcmNsZSBjeD0iNTAiIGN5PSI3MCIgcj0iMC44IiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjQiLz4KICAgICAgPGNpcmNsZSBjeD0iMTAiIGN5PSI4MCIgcj0iMS4yIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjMiLz4KICAgICAgPGNpcmNsZSBjeD0iOTAiIGN5PSI2MCIgcj0iMC42IiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjUiLz4KICAgICAgPGNpcmNsZSBjeD0iMzAiIGN5PSI0MCIgcj0iMC45IiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjMiLz4KICAgICAgPGNpcmNsZSBjeD0iNzAiIGN5PSIxMCIgcj0iMS4xIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjQiLz4KICAgIDwvcGF0dGVybj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9InVybCgjc3RhcnMpIi8+Cjwvc3ZnPg==');
-    background-size: cover, 100px 100px;
-    background-attachment: fixed, fixed;
-    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     min-height: 100vh;
+    color: #ffffff;
     overflow-x: hidden;
 }
 
@@ -23,157 +19,158 @@ body {
     padding: 40px 20px;
 }
 
-/* Toggle buttons */
-.toggle-section {
+/* 时间周期切换 */
+.period-switch {
     display: flex;
     justify-content: center;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
+    gap: 0;
 }
 
-.toggle-btn {
+.period-btn {
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
-    padding: 12px 32px;
+    padding: 12px 30px;
     font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
 }
 
-.toggle-btn:first-child {
+.period-btn:first-child {
     border-radius: 25px 0 0 25px;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.toggle-btn:last-child {
+.period-btn:last-child {
     border-radius: 0 25px 25px 0;
-    border-left: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.toggle-btn.active {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.toggle-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
+.period-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
     transform: translateY(-2px);
 }
 
-/* Winners section */
-.winners-section {
+.period-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* 前三名立体式卡片 */
+.top-three {
     display: flex;
     justify-content: center;
-    align-items: flex-end;
-    gap: 0px;
-    margin-bottom: 80px;
-    position: relative;
-    padding: 40px 20px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
-    border-radius: 30px;
-    backdrop-filter: blur(20px);
-    box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    align-items: end;
+    gap: 30px;
+    margin: 60px 0;
+    perspective: 1000px;
 }
 
-.winner {
+.rank-card {
+    position: relative;
+    border-radius: 20px;
+    padding: 30px 20px;
     text-align: center;
-    position: relative;
     transition: all 0.4s ease;
-    min-width: 200px;
-    padding: 20px 15px 40px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform-style: preserve-3d;
 }
 
-.winner:hover {
-    transform: translateY(-15px) scale(1.05);
+.rank-card:hover {
+    transform: rotateY(5deg) scale(1.05);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
 }
 
-.first-place {
-    order: 2;
+.rank-1 {
+    background: linear-gradient(145deg, rgba(255, 215, 0, 0.3), rgba(255, 193, 7, 0.2));
+    min-height: 420px;
+    width: 280px;
+    border: 2px solid rgba(255, 215, 0, 0.5);
+    box-shadow: 0 20px 50px rgba(255, 215, 0, 0.2);
     z-index: 3;
 }
 
-.second-place {
-    order: 1;
+.rank-2 {
+    background: linear-gradient(145deg, rgba(192, 192, 192, 0.3), rgba(169, 169, 169, 0.2));
+    min-height: 380px;
+    width: 260px;
+    border: 2px solid rgba(192, 192, 192, 0.5);
+    box-shadow: 0 15px 40px rgba(192, 192, 192, 0.15);
     z-index: 2;
-    margin-top: 60px;
 }
 
-.third-place {
-    order: 3;
+.rank-3 {
+    background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(184, 115, 51, 0.2));
+    min-height: 340px;
+    width: 240px;
+    border: 2px solid rgba(205, 127, 50, 0.5);
+    box-shadow: 0 15px 40px rgba(205, 127, 50, 0.15);
     z-index: 1;
-    margin-top: 100px;
 }
 
-/* Podium bases */
-.winner::before {
-    content: '';
+.crown {
     position: absolute;
-    bottom: 0;
+    top: -25px;
     left: 50%;
     transform: translateX(-50%);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
-    border-radius: 8px 8px 0 0;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-bottom: none;
+    font-size: 40px;
+    color: #FFD700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    animation: float 3s ease-in-out infinite;
 }
 
-.first-place::before {
-    width: 180px;
-    height: 120px;
-    background: linear-gradient(180deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.05) 100%);
-    border-color: rgba(255, 215, 0, 0.3);
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+@keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0px); }
+    50% { transform: translateX(-50%) translateY(-10px); }
 }
 
-.second-place::before {
-    width: 160px;
-    height: 80px;
-    background: linear-gradient(180deg, rgba(192, 192, 192, 0.2) 0%, rgba(192, 192, 192, 0.05) 100%);
-    border-color: rgba(192, 192, 192, 0.3);
+.card-inner {
+    position: relative;
+    z-index: 1;
 }
 
-.third-place::before {
-    width: 140px;
+.rank-badge {
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    width: 60px;
     height: 60px;
-    background: linear-gradient(180deg, rgba(205, 127, 50, 0.2) 0%, rgba(205, 127, 50, 0.05) 100%);
-    border-color: rgba(205, 127, 50, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.rank-badge i {
+    margin-right: 3px;
+    font-size: 14px;
 }
 
 .avatar {
+    margin: 30px auto 20px;
     width: 100px;
     height: 100px;
-    margin: 0 auto 20px;
     border-radius: 50%;
     overflow: hidden;
     border: 4px solid rgba(255, 255, 255, 0.3);
-    position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
-.first-place .avatar {
-    width: 120px;
-    height: 120px;
-    border-color: #ffd700;
-    box-shadow: 
-        0 0 40px rgba(255, 215, 0, 0.4),
-        0 15px 40px rgba(0, 0, 0, 0.3);
-    border-width: 5px;
-}
-
-.second-place .avatar {
-    border-color: #c0c0c0;
-    box-shadow: 
-        0 0 25px rgba(192, 192, 192, 0.3),
-        0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.third-place .avatar {
-    border-color: #cd7f32;
-    box-shadow: 
-        0 0 20px rgba(205, 127, 50, 0.3),
-        0 10px 30px rgba(0, 0, 0, 0.3);
+.avatar:hover {
+    transform: scale(1.1) rotateZ(5deg);
+    border-color: rgba(255, 255, 255, 0.6);
 }
 
 .avatar img {
@@ -182,199 +179,157 @@ body {
     object-fit: cover;
 }
 
-.winner h3 {
+.rank-card h3 {
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 15px;
-    color: #ffffff;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.first-place h3 {
-    font-size: 24px;
-    color: #ffd700;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-}
-
-.medal {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    position: relative;
-}
-
-.medal.gold {
-    background: linear-gradient(135deg, #ffd700, #ffed4e);
-    box-shadow: 
-        0 0 25px rgba(255, 215, 0, 0.6),
-        0 8px 25px rgba(0, 0, 0, 0.3);
-    width: 60px;
-    height: 60px;
-    font-size: 32px;
-}
-
-.medal.silver {
-    background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
-    box-shadow: 
-        0 0 20px rgba(192, 192, 192, 0.5),
-        0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.medal.bronze {
-    background: linear-gradient(135deg, #cd7f32, #daa520);
-    box-shadow: 
-        0 0 15px rgba(205, 127, 50, 0.5),
-        0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.points-label {
-    font-size: 14px;
+.achievement {
+    font-size: 12px;
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 15px;
-    font-weight: 500;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px 12px;
+    border-radius: 15px;
+    display: inline-block;
 }
 
 .prize {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    padding: 15px 20px;
-    background: rgba(0, 212, 255, 0.1);
-    border-radius: 25px;
-    border: 1px solid rgba(0, 212, 255, 0.3);
-    backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, rgba(0, 191, 255, 0.2), rgba(0, 123, 255, 0.2));
+    border: 1px solid rgba(0, 191, 255, 0.3);
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 20px;
 }
 
-.first-place .prize {
-    background: rgba(255, 215, 0, 0.15);
-    border-color: rgba(255, 215, 0, 0.4);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-}
-
-.second-place .prize {
-    background: rgba(192, 192, 192, 0.1);
-    border-color: rgba(192, 192, 192, 0.3);
-}
-
-.third-place .prize {
-    background: rgba(205, 127, 50, 0.1);
-    border-color: rgba(205, 127, 50, 0.3);
-}
-
-.diamond {
+.prize i {
+    color: #00BFFF;
+    margin-right: 8px;
     font-size: 18px;
 }
 
-.amount {
-    font-size: 28px;
+.prize span {
+    font-size: 24px;
     font-weight: 800;
-    color: #00d4ff;
-    text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    background: linear-gradient(135deg, #00BFFF, #1E90FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.first-place .amount {
-    font-size: 32px;
-    color: #ffd700;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-}
-
-.prize-label {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* Countdown section */
-.countdown-section {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.timer-icon {
-    font-size: 32px;
-    margin-bottom: 10px;
-}
-
-.timer-label {
-    font-size: 16px;
+.prize small {
+    display: block;
+    font-size: 12px;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+/* 激励信息区域 */
+.motivation-section {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 50px 0;
+    text-align: center;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .countdown {
-    font-size: 32px;
-    font-weight: 700;
-    color: #00d4ff;
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+    margin-bottom: 20px;
 }
 
-/* Status message */
-.status-message {
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+.countdown i {
+    color: #FF6B6B;
+    margin-right: 10px;
+    font-size: 20px;
 }
 
-.earned-amount {
-    color: #00d4ff;
-    font-weight: 600;
-}
-
-.total-users {
-    color: #00d4ff;
-    font-weight: 600;
-}
-
-/* Ranking table */
-.ranking-table {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.table-header {
-    display: grid;
-    grid-template-columns: 80px 1fr 120px 120px 120px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    font-weight: 600;
-    font-size: 14px;
+.countdown span {
+    font-size: 16px;
     color: rgba(255, 255, 255, 0.8);
+    margin-right: 15px;
+}
+
+.time-display {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #FF6B6B, #FFE66D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 10px 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stats {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    background: rgba(0, 191, 255, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 191, 255, 0.2);
+}
+
+.stats i {
+    color: #00BFFF;
+    margin: 0 5px;
+}
+
+/* 排行榜表格 */
+.leaderboard-table {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 40px 0;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+}
+
+thead th {
+    padding: 20px 15px;
+    font-weight: 700;
+    text-align: left;
+    font-size: 14px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.table-row {
-    display: grid;
-    grid-template-columns: 80px 1fr 120px 120px 120px;
-    padding: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
-    align-items: center;
 }
 
-.table-row:hover {
-    background: rgba(255, 255, 255, 0.08);
+tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: scale(1.01);
 }
 
-.rank-col {
-    font-weight: 600;
+tbody td {
+    padding: 20px 15px;
+    vertical-align: middle;
+}
+
+.rank {
     font-size: 18px;
+    font-weight: 800;
+    color: #FFD700;
+    text-align: center;
+    width: 80px;
 }
 
 .user-info {
@@ -383,172 +338,159 @@ body {
     gap: 15px;
 }
 
-.user-avatar {
-    width: 40px;
-    height: 40px;
+.user-info img {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-.user-details {
-    display: flex;
-    flex-direction: column;
-}
-
-.user-name {
+.name {
     font-weight: 600;
-    font-size: 16px;
-    color: #ffffff;
+    margin-bottom: 2px;
 }
 
-.user-handle {
-    font-size: 14px;
+.username {
+    font-size: 12px;
     color: rgba(255, 255, 255, 0.6);
 }
 
-.followers-col, .points-col {
+.reward {
+    text-align: center;
+    font-weight: 700;
+}
+
+.reward i {
+    color: #00BFFF;
+    margin-right: 5px;
+}
+
+/* 激励标语 */
+.motivation-banner {
+    background: linear-gradient(135deg, #FF6B6B, #FFE66D, #4ECDC4);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    margin: 50px 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(255, 107, 107, 0.3);
+}
+
+.motivation-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.motivation-text {
+    position: relative;
+    z-index: 1;
+}
+
+.motivation-text h2 {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+.motivation-text h2 i {
+    color: #FFD700;
+    margin-right: 10px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.motivation-text p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.95);
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.reward-col {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #00d4ff;
-    font-weight: 600;
-}
-
-/* Responsive design */
+/* 响应式设计 */
 @media (max-width: 768px) {
     .container {
-        padding: 20px 15px;
+        padding: 20px 10px;
     }
     
-    .winners-section {
+    .top-three {
         flex-direction: column;
         align-items: center;
         gap: 20px;
-        padding: 30px 15px;
     }
     
-    .first-place {
-        order: 1;
-        margin-top: 0;
+    .rank-card {
+        width: 100%;
+        max-width: 300px;
+        min-height: auto !important;
     }
     
-    .second-place {
-        order: 2;
-        margin-top: 0;
-    }
-    
-    .third-place {
-        order: 3;
-        margin-top: 0;
-    }
-    
-    .winner::before {
-        display: none;
-    }
-    
-    .avatar {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .first-place .avatar {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .table-header,
-    .table-row {
-        grid-template-columns: 60px 1fr 80px 100px 80px;
-        padding: 15px 10px;
+    .period-btn {
+        padding: 10px 20px;
         font-size: 14px;
     }
     
-    .user-info {
-        gap: 10px;
+    .time-display {
+        font-size: 20px;
     }
     
-    .user-avatar {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .user-name {
-        font-size: 14px;
-    }
-    
-    .user-handle {
-        font-size: 12px;
-    }
-    
-    .countdown {
+    .motivation-text h2 {
         font-size: 24px;
     }
     
-    .toggle-btn {
-        padding: 10px 24px;
-        font-size: 14px;
+    .motivation-text p {
+        font-size: 16px;
+    }
+    
+    .leaderboard-table {
+        overflow-x: auto;
+    }
+    
+    table {
+        min-width: 600px;
     }
 }
 
 @media (max-width: 480px) {
-    .table-header,
-    .table-row {
-        grid-template-columns: 50px 1fr 70px 80px 60px;
+    .user-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+    
+    .user-info img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    thead th,
+    tbody td {
         padding: 12px 8px;
         font-size: 12px;
     }
     
-    .amount {
-        font-size: 20px;
+    .rank {
+        font-size: 14px;
     }
     
-    .winner {
-        min-width: 180px;
-        padding: 20px 15px;
+    .motivation-banner {
+        padding: 25px 15px;
     }
-}
-
-/* Animation effects */
-@keyframes float {
-    0%, 100% { transform: translateY(0px) scale(1); }
-    50% { transform: translateY(-8px) scale(1.02); }
-}
-
-@keyframes glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
-    50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
-}
-
-.first-place .medal.gold {
-    animation: glow 2s ease-in-out infinite;
-}
-
-.first-place .avatar {
-    animation: float 4s ease-in-out infinite;
-}
-
-/* Gradient text effect */
-.amount {
-    background: linear-gradient(45deg, #00d4ff, #0099cc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* Glow effects */
-.winner {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.first-place {
-    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
-}
-
-.ranking-table {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
