@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dripit Leaderboard - 综合排行榜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 75%, #1a1a2e 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(30, 144, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Main Layout */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .balance-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .balance-icon {
+            color: #00ff88;
+            font-size: 1.2rem;
+        }
+
+        .balance-text {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .balance-amount {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-left: auto;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 8px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: #a0a0a0;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: absolute;
+            bottom: 80px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 4px;
+        }
+
+        .theme-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            background: transparent;
+            color: #a0a0a0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .theme-btn.active {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        /* User Profile */
+        .user-profile {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user-info h4 {
+            color: #ffffff;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .sign-out {
+            margin-left: auto;
+            color: #a0a0a0;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 20px 40px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            letter-spacing: -2px;
+        }
+
+        /* Competition Section */
+        .competition-section {
+            margin-bottom: 40px;
+        }
+
+        .competition-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .competition-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #a0a0a0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .competition-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Daily Competition Layout */
+        .daily-competition {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .competitor-card {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .competitor-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .competitor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .competitor-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .earn-text {
+            color: #a0a0a0;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .prize-amount {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .prize-label {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .competition-timer {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timer-label {
+            color: #a0a0a0;
+            margin-bottom: 10px;
+        }
+
+        .timer-display {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .user-ranking {
+            text-align: center;
+            padding: 15px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        /* Content Layout for Monthly View */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+        }
+
+        /* Podium Section */
+        .podium-section {
+            margin-bottom: 30px;
+        }
+
+        .podium-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 20px;
+            perspective: 1000px;
+            margin-bottom: 40px;
+        }
+
+        .podium-place {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .podium-place:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .avatar-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .avatar {
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .first-place .avatar {
+            width: 100px;
+            height: 100px;
+            border-color: #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+        }
+
+        .second-place .avatar {
+            width: 80px;
+            height: 80px;
+            border-color: #c0c0c0;
+            box-shadow: 0 0 25px rgba(192, 192, 192, 0.5);
+        }
+
+        .third-place .avatar {
+            width: 80px;
+            height: 80px;
+            border-color: #cd7f32;
+            box-shadow: 0 0 25px rgba(205, 127, 50, 0.5);
+        }
+
+        .crown {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .podium-place .name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .podium-place .earnings {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .podium-base {
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .podium-base.first {
+            width: 120px;
+            height: 140px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffc107 100%);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .podium-base.second {
+            width: 100px;
+            height: 110px;
+            background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 50%, #a8a8a8 100%);
+            box-shadow: 0 8px 25px rgba(192, 192, 192, 0.4);
+        }
+
+        .podium-base.third {
+            width: 100px;
+            height: 90px;
+            background: linear-gradient(135deg, #cd7f32 0%, #e4a853 50%, #b86f2a 100%);
+            box-shadow: 0 6px 20px rgba(205, 127, 50, 0.4);
+        }
+
+        /* Leaderboard Card */
+        .leaderboard-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 4px;
+            gap: 4px;
+        }
+
+        .toggle-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: #ffffff;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .leaderboard-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .leaderboard-item:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+            transform: translateX(5px);
+        }
+
+        .leaderboard-item .rank {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffd700;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .small-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .player-info {
+            flex: 1;
+        }
+
+        .player-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .battle-stats {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+        }
+
+        .earnings-badge {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Prize Tier Section */
+        .prize-tiers {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            height: fit-content;
+        }
+
+        .prize-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .prize-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .prize-description {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .prize-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .prize-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .prize-item.featured {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .prize-item:hover {
+            transform: translateX(5px);
+        }
+
+        .prize-rank {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #ffd700;
+            min-width: 40px;
+        }
+
+        .prize-label {
+            color: #ffffff;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .prize-amount {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .daily-competition {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .podium-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Hidden by default */
+        .monthly-view {
+            display: block;
+        }
+        
+        .daily-view {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">d</div>
+                <h1>dripit</h1>
+            </div>
+            
+            <div class="balance-section">
+                <i class="fas fa-coins balance-icon"></i>
+                <span class="balance-text">Balance</span>
+                <span class="balance-amount">540</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-home nav-icon"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-rocket nav-icon"></i>
+                        Launchpad
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-exchange-alt nav-icon"></i>
+                        Trade
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-sword nav-icon"></i>
+                        Battles
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users nav-icon"></i>
+                        Artists
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-trophy nav-icon"></i>
+                        Leaderboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-wallet nav-icon"></i>
+                        Wallet
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-bell nav-icon"></i>
+                        Notifications
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="theme-toggle">
+                <button class="theme-btn">
+                    <i class="fas fa-sun"></i> Light
+                </button>
+                <button class="theme-btn active">
+                    <i class="fas fa-moon"></i> Dark
+                </button>
+            </div>
+            
+            <div class="user-profile">
+                <div class="user-avatar">JC</div>
+                <div class="user-info">
+                    <h4>James C.</h4>
+                </div>
+                <span class="sign-out">
+                    <i class="fas fa-sign-out-alt"></i>
+                </span>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <h1 class="main-title">Leaderboard</h1>
+            </header>
+
+            <!-- Competition Toggle -->
+            <div class="competition-section">
+                <div class="competition-toggle">
+                    <button class="competition-btn" onclick="showDailyView()">Daily</button>
+                    <button class="competition-btn active" onclick="showMonthlyView()">Monthly</button>
+                </div>
+
+                <!-- Daily Competition View -->
+                <div class="daily-view" id="dailyView">
+                    <div class="daily-competition">
+                        <div class="competitor-card">
+                            <div class="competitor-avatar">BN</div>
+                            <h3 class="competitor-name">Brian Ngo</h3>
+                            <p class="earn-text">Earn 2,000 points</p>
+                            <div class="prize-amount">💎 50,000</div>
+                            <div class="prize-label">Prize</div>
+                        </div>
+                        
+                        <div class="competitor-card">
+                            <div class="competitor-avatar">JJ</div>
+                            <h3 class="competitor-name">Jolie Joie</h3>
+                            <p class="earn-text">Earn 2,000 points</p>
+                            <div class="prize-amount">💎 100,000</div>
+                            <div class="prize-label">Prize</div>
+                        </div>
+                        
+                        <div class="competitor-card">
+                            <div class="competitor-avatar">DD</div>
+                            <h3 class="competitor-name">David Do</h3>
+                            <p class="earn-text">Earn 2,000 points</p>
+                            <div class="prize-amount">💎 20,000</div>
+                            <div class="prize-label">Prize</div>
+                        </div>
+                    </div>
+
+                    <div class="competition-timer">
+                        <div class="timer-label">⏰ Ends in</div>
+                        <div class="timer-display">10d 23h 59m 29s</div>
+                    </div>
+
+                    <div class="user-ranking">
+                        <p>You earned ❤️ 5 today and we ranked - out of <strong>23,141 users</strong></p>
+                    </div>
+
+                    <!-- Daily Leaderboard Table -->
+                    <div class="leaderboard-card">
+                        <div class="card-header">
+                            <h2>📊 Daily Rankings</h2>
+                        </div>
+                        
+                        <div class="leaderboard-list">
+                            <div class="leaderboard-item">
+                                <span class="rank">4</span>
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face" alt="Henrietta O'Connell" class="small-avatar">
+                                <div class="player-info">
+                                    <div class="player-name">Henrietta O'Connell</div>
+                                    <div class="battle-stats">@henrietta</div>
+                                </div>
+                                <div class="player-info">
+                                    <div class="player-name">12,241</div>
+                                    <div class="battle-stats">Followers</div>
+                                </div>
+                                <div class="player-info">
+                                    <div class="player-name">2,114,424</div>
+                                    <div class="battle-stats">Point</div>
+                                </div>
+                                <div class="earnings-badge">💎 1000</div>
+                            </div>
+                            
+                            <div class="leaderboard-item">
+                                <span class="rank">5</span>
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Darrel Bins" class="small-avatar">
+                                <div class="player-info">
+                                    <div class="player-name">Darrel Bins</div>
+                                    <div class="battle-stats">@darrel</div>
+                                </div>
+                                <div class="player-info">
+                                    <div class="player-name">12,241</div>
+                                    <div class="battle-stats">Followers</div>
+                                </div>
+                                <div class="player-info">
+                                    <div class="player-name">2,114,424</div>
+                                    <div class="battle-stats">Point</div>
+                                </div>
+                                <div class="earnings-badge">💎 1000</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monthly Competition View -->
+                <div class="monthly-view" id="monthlyView">
+                    <div class="content-layout">
+                        <!-- Left Column: Podium + Leaderboard -->
+                        <div class="main-column">
+                            <!-- Podium Section -->
+                            <div class="podium-section">
+                                <div class="podium-container">
+                                    <!-- 2nd Place -->
+                                    <div class="podium-place second-place">
+                                        <div class="avatar-container">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Abram Mango" class="avatar">
+                                            <div class="crown">👑</div>
+                                        </div>
+                                        <h3 class="name">Abram Mango</h3>
+                                        <div class="earnings">$ 415</div>
+                                        <div class="podium-base second">
+                                            <span class="rank-number">2</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- 1st Place -->
+                                    <div class="podium-place first-place">
+                                        <div class="avatar-container">
+                                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face" alt="Kianna Torff" class="avatar">
+                                            <div class="crown">👑</div>
+                                        </div>
+                                        <h3 class="name">Kianna Torff</h3>
+                                        <div class="earnings">$ 420</div>
+                                        <div class="podium-base first">
+                                            <span class="rank-number">1</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- 3rd Place -->
+                                    <div class="podium-place third-place">
+                                        <div class="avatar-container">
+                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Alfonso Lubin" class="avatar">
+                                            <div class="crown">👑</div>
+                                        </div>
+                                        <h3 class="name">Alfonso Lubin</h3>
+                                        <div class="earnings">$ 390</div>
+                                        <div class="podium-base third">
+                                            <span class="rank-number">3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Monthly Leaderboard -->
+                            <div class="leaderboard-card">
+                                <div class="card-header">
+                                    <h2>📊 Monthly Leaderboard</h2>
+                                    <div class="toggle-buttons">
+                                        <button class="toggle-btn active">Monthly</button>
+                                        <button class="toggle-btn">All Time</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="leaderboard-list">
+                                    <div class="leaderboard-item">
+                                        <span class="rank">1</span>
+                                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face" alt="Kianna Torff" class="small-avatar">
+                                        <div class="player-info">
+                                            <div class="player-name">Kianna Torff</div>
+                                            <div class="battle-stats">🏆 Battles won: ▲ 69 / 88</div>
+                                        </div>
+                                        <div class="earnings-badge">$ 420</div>
+                                    </div>
+                                    
+                                    <div class="leaderboard-item">
+                                        <span class="rank">2</span>
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Abram Mango" class="small-avatar">
+                                        <div class="player-info">
+                                            <div class="player-name">Abram Mango</div>
+                                            <div class="battle-stats">💪 Battles won: ▲ 73 / 100</div>
+                                        </div>
+                                        <div class="earnings-badge">$ 415</div>
+                                    </div>
+                                    
+                                    <div class="leaderboard-item">
+                                        <span class="rank">3</span>
+                                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face" alt="Alfonso Lubin" class="small-avatar">
+                                        <div class="player-info">
+                                            <div class="player-name">Alfonso Lubin</div>
+                                            <div class="battle-stats">🔥 Battles won: ▲ 63 / 89</div>
+                                        </div>
+                                        <div class="earnings-badge">$ 390</div>
+                                    </div>
+                                    
+                                    <div class="leaderboard-item">
+                                        <span class="rank">4</span>
+                                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face" alt="Maren Gouse" class="small-avatar">
+                                        <div class="player-info">
+                                            <div class="player-name">Maren Gouse</div>
+                                            <div class="battle-stats">⚡ Battles won: ▲ 59 / 90</div>
+                                        </div>
+                                        <div class="earnings-badge">$ 385</div>
+                                    </div>
+                                    
+                                    <div class="leaderboard-item">
+                                        <span class="rank">5</span>
+                                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=50&h=50&fit=crop&crop=face" alt="Desirae Herwitz" class="small-avatar">
+                                        <div class="player-info">
+                                            <div class="player-name">Desirae Herwitz</div>
+                                            <div class="battle-stats">🚀 Battles won: ▲ 53 / 112</div>
+                                        </div>
+                                        <div class="earnings-badge">$ 360</div>
+                                    </div>
+                                    
+                                    <div class="leaderboard-item">
+                                        <span class="rank">6</span>
+                                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face" alt="Kianna Torff" class="small-avatar">
+                                        <div class="player-info">
+                                            <div class="player-name">Kianna Torff</div>
+                                            <div class="battle-stats">💎 Battles won: ▲ 24 / 76</div>
+                                        </div>
+                                        <div class="earnings-badge">$ 324</div>
+                                    </div>
+                                    
+                                    <div class="leaderboard-item">
+                                        <span class="rank">7</span>
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" alt="Max Cooper" class="small-avatar">
+                                        <div class="player-info">
+                                            <div class="player-name">Max Cooper</div>
+                                            <div class="battle-stats">⭐ Battles won: ▲ 32 / 97</div>
+                                        </div>
+                                        <div class="earnings-badge">$ 290</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Prize Tiers -->
+                        <div class="prize-tiers">
+                            <div class="prize-header">
+                                <i class="fas fa-trophy" style="color: #ffd700;"></i>
+                                <h2>Monthly Rewards</h2>
+                            </div>
+                            
+                            <p class="prize-description">
+                                At the end of each month, the top 10 winners on our leaderboard receive 
+                                <strong>$USDC rewards</strong> based on their ranking.
+                            </p>
+                            
+                            <div class="prize-list">
+                                <div class="prize-item featured">
+                                    <span class="prize-rank">1st</span>
+                                    <span class="prize-label">place</span>
+                                    <span class="prize-amount">$ 250</span>
+                                </div>
+                                
+                                <div class="prize-item featured">
+                                    <span class="prize-rank">2nd</span>
+                                    <span class="prize-label">place</span>
+                                    <span class="prize-amount">$ 200</span>
+                                </div>
+                                
+                                <div class="prize-item featured">
+                                    <span class="prize-rank">3rd</span>
+                                    <span class="prize-label">place</span>
+                                    <span class="prize-amount">$ 150</span>
+                                </div>
+                                
+                                <div class="prize-item">
+                                    <span class="prize-rank">4th</span>
+                                    <span class="prize-label">place</span>
+                                    <span class="prize-amount">$ 100</span>
+                                </div>
+                                
+                                <div class="prize-item">
+                                    <span class="prize-rank">5th</span>
+                                    <span class="prize-label">place</span>
+                                    <span class="prize-amount">$ 75</span>
+                                </div>
+                                
+                                <div class="prize-item">
+                                    <span class="prize-rank">6th</span>
+                                    <span class="prize-label">place</span>
+                                    <span class="prize-amount">$ 60</span>
+                                </div>
+                                
+                                <div class="prize-item">
+                                    <span class="prize-rank">7th</span>
+                                    <span class="prize-label">place</span>
+                                    <span class="prize-amount">$ 50</span>
+                                </div>
+                                
+                                <div class="prize-item">
+                                    <span class="prize-rank">8th</span>
+                                    <span class="prize-label">place</span>
+                                    <span class="prize-amount">$ 40</span>
+                                </div>
+                                
+                                <div class="prize-item">
+                                    <span class="prize-rank">9th</span>
+                                    <span class="prize-label">place</span>
+                                    <span class="prize-amount">$ 30</span>
+                                </div>
+                                
+                                <div class="prize-item">
+                                    <span class="prize-rank">10th</span>
+                                    <span class="prize-label">place</span>
+                                    <span class="prize-amount">$ 25</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function showDailyView() {
+            document.getElementById('dailyView').style.display = 'block';
+            document.getElementById('monthlyView').style.display = 'none';
+            
+            // Update buttons
+            document.querySelectorAll('.competition-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function showMonthlyView() {
+            document.getElementById('dailyView').style.display = 'none';
+            document.getElementById('monthlyView').style.display = 'block';
+            
+            // Update buttons
+            document.querySelectorAll('.competition-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Toggle functionality for leaderboard buttons
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from siblings
+                this.parentNode.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+            });
+        });
+
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+        }
+
+        // Add countdown timer functionality
+        function updateTimer() {
+            const timer = document.querySelector('.timer-display');
+            if (timer) {
+                // This is a simple example - in a real app you'd calculate from a target date
+                let timeLeft = {
+                    days: 10,
+                    hours: 23,
+                    minutes: 59,
+                    seconds: 29
+                };
+                
+                // Decrement seconds
+                timeLeft.seconds--;
+                if (timeLeft.seconds < 0) {
+                    timeLeft.seconds = 59;
+                    timeLeft.minutes--;
+                    if (timeLeft.minutes < 0) {
+                        timeLeft.minutes = 59;
+                        timeLeft.hours--;
+                        if (timeLeft.hours < 0) {
+                            timeLeft.hours = 23;
+                            timeLeft.days--;
+                        }
+                    }
+                }
+                
+                timer.textContent = `${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`;
+            }
+        }
+
+        // Update timer every second
+        setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
