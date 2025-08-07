@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏排行榜</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="toggle-buttons">
+                <button class="toggle-btn active">Daily</button>
+                <button class="toggle-btn">Monthly</button>
+            </div>
+        </div>
+
+        <!-- Top 3 Podium Section -->
+        <div class="podium-section">
+            <div class="podium">
+                <!-- Second Place -->
+                <div class="podium-item second-place">
+                    <div class="avatar">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Brian Ngo">
+                    </div>
+                    <div class="player-name">Brian Ngo</div>
+                    <div class="achievement">
+                        <div class="medal silver">🥈</div>
+                        <div class="points-label">Earn 2,000 points</div>
+                    </div>
+                    <div class="prize">
+                        <span class="diamond">💎</span>
+                        <span class="amount">50,000</span>
+                        <div class="prize-label">Prize</div>
+                    </div>
+                    <div class="podium-base second"></div>
+                </div>
+
+                <!-- First Place -->
+                <div class="podium-item first-place">
+                    <div class="avatar">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Jolie Joie">
+                    </div>
+                    <div class="player-name">Jolie Joie</div>
+                    <div class="achievement">
+                        <div class="medal gold">🏆</div>
+                        <div class="points-label">Earn 2,000 points</div>
+                    </div>
+                    <div class="prize">
+                        <span class="diamond">💎</span>
+                        <span class="amount">100,000</span>
+                        <div class="prize-label">Prize</div>
+                    </div>
+                    <div class="podium-base first"></div>
+                </div>
+
+                <!-- Third Place -->
+                <div class="podium-item third-place">
+                    <div class="avatar">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="David Do">
+                    </div>
+                    <div class="player-name">David Do</div>
+                    <div class="achievement">
+                        <div class="medal bronze">🥉</div>
+                        <div class="points-label">Earn 2,000 points</div>
+                    </div>
+                    <div class="prize">
+                        <span class="diamond">💎</span>
+                        <span class="amount">20,000</span>
+                        <div class="prize-label">Prize</div>
+                    </div>
+                    <div class="podium-base third"></div>
+                </div>
+            </div>
+
+            <!-- Timer Section -->
+            <div class="timer-section">
+                <div class="timer-icon">⏰</div>
+                <div class="timer-text">Ends in</div>
+                <div class="timer-countdown">10d 23h 59m 29s</div>
+            </div>
+        </div>
+
+        <!-- Achievement Banner -->
+        <div class="achievement-banner">
+            <span>You earned</span>
+            <span class="diamond">💎</span>
+            <span class="earned-points">5</span>
+            <span>today and we ranked - out of</span>
+            <span class="total-users">23141 users</span>
+        </div>
+
+        <!-- Leaderboard Table -->
+        <div class="leaderboard-table">
+            <div class="table-header">
+                <div class="rank-col">Rank</div>
+                <div class="user-col">User name</div>
+                <div class="followers-col">Followers</div>
+                <div class="point-col">Point</div>
+                <div class="reward-col">Reward</div>
+            </div>
+            
+            <div class="table-row">
+                <div class="rank">4</div>
+                <div class="user">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face" alt="Henrietta O'Connell">
+                    <div class="user-info">
+                        <div class="username">Henrietta O'Connell</div>
+                        <div class="handle">@henrietta</div>
+                    </div>
+                </div>
+                <div class="followers">12,241</div>
+                <div class="points">2,114,424</div>
+                <div class="reward">
+                    <span class="diamond">💎</span>
+                    <span>1000</span>
+                </div>
+            </div>
+
+            <div class="table-row">
+                <div class="rank">5</div>
+                <div class="user">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Darrel Bins">
+                    <div class="user-info">
+                        <div class="username">Darrel Bins</div>
+                        <div class="handle">@darrel</div>
+                    </div>
+                </div>
+                <div class="followers">12,241</div>
+                <div class="points">2,114,424</div>
+                <div class="reward">
+                    <span class="diamond">💎</span>
+                    <span>1000</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
